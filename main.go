@@ -1,5 +1,9 @@
 package main
 
+import (
+	"github.com/fromsi/schedule_bot/bot"
+)
+
 func main() {
-	run()
+	bot.Run()
 }
