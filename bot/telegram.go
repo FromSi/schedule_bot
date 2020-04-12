@@ -3,6 +3,7 @@ package bot
 import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
+	"net/http"
 	"os"
 )
 
@@ -14,13 +15,20 @@ var updates tgbotapi.UpdatesChannel
 
 // Создание связи Telegram бота с проектом.
 func init() {
+	var test bool = true // true -> тестовый бот
 	bot, _ = tgbotapi.NewBotAPI(os.Getenv("SCHEDULE_BOT"))
-	bot.Debug = true
+	bot.Debug = test
 
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
 
-	updates, _ = bot.GetUpdatesChan(u)
+	if test {
+		updates, _ = bot.GetUpdatesChan(u)
+	} else {
+		bot.SetWebhook(tgbotapi.NewWebhookWithCert("https://0.0.0.0:8101/"+bot.Token, "cert.pem"))
+		updates = bot.ListenForWebhook("/" + bot.Token)
+		go http.ListenAndServeTLS("0.0.0.0:8101", "cert.pem", "key.pem", nil)
+	}
 }
 
 // Запуск бота в Telegram.
