@@ -25,9 +25,9 @@ func init() {
 	if test {
 		updates, _ = bot.GetUpdatesChan(u)
 	} else {
-		bot.SetWebhook(tgbotapi.NewWebhookWithCert("https://0.0.0.0:8101/"+bot.Token, "cert.pem"))
+		bot.SetWebhook(tgbotapi.NewWebhookWithCert("https://"+os.Getenv("IP_SERVER")+":"+os.Getenv("BOT_PORT")+"/"+bot.Token, "/cert/cert.pem"))
 		updates = bot.ListenForWebhook("/" + bot.Token)
-		go http.ListenAndServeTLS("0.0.0.0:8101", "cert.pem", "key.pem", nil)
+		log.Fatal(http.ListenAndServeTLS(":"+os.Getenv("BOT_PORT"), "/cert/cert.pem", "/cert/key.pem", nil))
 	}
 }
 

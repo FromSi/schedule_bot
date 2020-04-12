@@ -5,4 +5,8 @@ services:
     environment:
       - SCHEDULE_BOT=1234567890:TOKEN_FUCK_YOU_TOKEN
       - SCHEDULE_MONGO_URL=mongodb://localhost:27017
-    network_mode: "host"
+      - IP_SERVER=0.0.0.0
+      - BOT_PORT=8443
+#    network_mode: "host"
+    ports:
+    - 8443:8443
