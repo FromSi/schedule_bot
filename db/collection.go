@@ -16,10 +16,10 @@ type schedule struct {
 
 // Получить расписание в string.
 func (s schedule) toString() string {
-	return "Предмет: " + s.Name + "\n" +
+	return "Дисциплина: " + s.Name + "\n" +
 		"Преподаватель: " + s.Teacher + "\n" +
 		"Время: " + s.Time + "\n" +
-		"Ссылка: https://us04web.zoom.us/j/" + s.Number + "\n\n"
+		"ID: " + s.Number + "\n\n"
 }
 
 // Получить информацию в string.
