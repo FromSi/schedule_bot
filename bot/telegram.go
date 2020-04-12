@@ -25,9 +25,9 @@ func init() {
 	if test {
 		updates, _ = bot.GetUpdatesChan(u)
 	} else {
-		bot.SetWebhook(tgbotapi.NewWebhookWithCert("https://"+os.Getenv("IP_SERVER")+":"+os.Getenv("BOT_PORT")+"/"+bot.Token, "/cert/cert.pem"))
+		bot.SetWebhook(tgbotapi.NewWebhookWithCert("https://"+os.Getenv("IP_SERVER")+":"+os.Getenv("BOT_PORT")+"/"+bot.Token, "/go/src/github.com/fromsi/schedule_bot/cert.pem"))
 		updates = bot.ListenForWebhook("/" + bot.Token)
-		log.Fatal(http.ListenAndServeTLS(":"+os.Getenv("BOT_PORT"), "/cert/cert.pem", "/cert/key.pem", nil))
+		log.Fatal(http.ListenAndServeTLS(":"+os.Getenv("BOT_PORT"), "/go/src/github.com/fromsi/schedule_bot/cert.pem", "/go/src/github.com/fromsi/schedule_bot/key.pem", nil))
 	}
 }
 
